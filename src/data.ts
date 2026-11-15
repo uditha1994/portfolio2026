@@ -3,12 +3,12 @@ const gh = (repo: string) => `https://github.com/uditha1994/${repo}`
 export const profile = {
   name: 'Uditha Landekumbura',
   roles: ['Lecturer', 'Software Engineer', 'Builder'],
-  location: 'Colombo, Sri Lanka',
+  location: 'Sri Lanka',
   coords: '6.9271° N  79.8612° E',
   email: 'uditha@programmer.net',
   github: 'https://github.com/uditha1994',
   linkedin: 'https://www.linkedin.com/in/uditha94/',
-  blog: 'https://fullstackcraft.dev/',
+  blog: '',
   about:
     'I sit on both sides of the desk. By day I am a Lecturer and Program Manager at the Management and Science Institute in Sri Lanka, teaching Computer Science diploma and degree students. The rest of the time I am a software engineer shipping real systems. Almost nothing here is a portfolio piece built to be looked at. The teaching and the engineering feed each other.',
   quote: 'The best way to learn a thing properly is to have to explain it to thirty people on a Monday morning.',
@@ -17,20 +17,20 @@ export const profile = {
 }
 
 export const stats = [
-  { n: 102, label: 'public repositories' },
+  { n: 100, label: 'public repositories' },
   { n: 2019, label: 'on GitHub since', plain: true },
   { n: 8, label: 'modules with open reference code' },
-  { n: 3, label: 'languages in one game: EN · සිං · தமிழ்' },
+  { n: 3, label: 'languages in expert: JAVA · සිං · தமிழ்' },
 ]
 
 export const affiliations = [
   { k: 'Lecturer & Program Manager', v: 'Management and Science Institute (MSI), Sri Lanka' },
-  { k: 'Software Engineer', v: 'Red Vulture Innovations' },
+  { k: 'Software Engineer', v: 'FullStack Craft' },
   { k: 'Coach', v: 'ICPC Sri Lanka regionals team' },
-  { k: 'Runs', v: 'STACK, the student led ICT club at MSI Faculty of Computing' },
+  { k: 'Build', v: 'Web & Mobile Applications, IoT & Embedded Systems' },
 ]
 
-export const teaches = ['Computer Science', 'Research Methodology', 'Natural Language Processing', 'E-Commerce']
+export const teaches = ['Programming Fundamentals', 'Web Technologies & Frameworks', 'Research Methodology', 'Natural Language Processing', 'E-Commerce']
 
 export const classroom = [
   { topic: 'MVC and layered architecture', repos: ['sahana-health', 'CRUD_with_Layered_Architecrure'] },
@@ -78,7 +78,7 @@ export const now = [
   { k: 'Studying', v: 'Google Cloud Generative AI Leader certification, with the roadmap published' },
   { k: 'Coaching', v: 'A student team for the ICPC Sri Lanka regionals' },
   { k: 'Running', v: 'STACK, the student led ICT club' },
-  { k: 'Building', v: 'Browser games with a Sri Lankan setting, used as workshop material' },
+  { k: 'Building', v: 'Web & Mobile Applications, 2D games' },
   { k: 'Teaching', v: 'Robotics and IoT workshops for school students, AI tool training for teachers' },
 ]
 

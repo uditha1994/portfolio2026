@@ -251,7 +251,7 @@ export default function App() {
           <div className="hero-pin">
             <div className="hero-a">
               <p className="eyebrow">
-                Portfolio 2026 <i /> {profile.location} <i /> {profile.coords}
+                Uditha2026 <i /> {profile.location} <i /> {profile.coords}
               </p>
               <h1 className="hero-name">
                 <span>Uditha</span>
