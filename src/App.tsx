@@ -3,7 +3,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
 import { fx, asset } from './fx'
-import { affiliations, classroom, loop, now, profile, stack, stats, teaches, work } from './data'
+import { certifications, classroom, education, experience, loop, now, profile, skills, stack, stats, teaches, work } from './data'
 
 const Stage = lazy(() => import('./gl/Stage'))
 
@@ -107,13 +107,14 @@ export default function App() {
       )
       gsap.utils.toArray<HTMLElement>('.stat b').forEach((el) => {
         const end = Number(el.dataset.n)
-        if (el.dataset.plain || fx.reduced) return void (el.textContent = String(end))
+        const sfx = el.dataset.suffix || ''
+        if (fx.reduced) return void (el.textContent = end + sfx)
         const o = { v: 0 }
         gsap.to(o, {
           v: end,
           duration: 1.6,
           ease: 'power3.out',
-          onUpdate: () => (el.textContent = String(Math.round(o.v))),
+          onUpdate: () => (el.textContent = Math.round(o.v) + sfx),
           scrollTrigger: { trigger: el, start: 'top 90%', once: true },
         })
       })
@@ -167,8 +168,15 @@ export default function App() {
         trigger: '#contact',
         start: 'top bottom',
         end: 'bottom bottom',
-        onUpdate: (s) => (fx.globe = s.progress),
-        onToggle: (s) => ((act.globe = s.isActive || s.progress === 1), sync()),
+        onUpdate: (s) => {
+          fx.globe = s.progress
+          // derived from progress, not onToggle, so jumping straight to the end still wakes the stage
+          const on = s.progress > 0
+          if (on !== act.globe) {
+            act.globe = on
+            sync()
+          }
+        },
       })
       gsap.from('.contact-body > *', {
         autoAlpha: 0,
@@ -220,7 +228,7 @@ export default function App() {
       <div className={`boot${ready ? ' is-done' : ''}`} aria-hidden={ready}>
         <span className="boot-ring" />
         <p>
-          <span>05:00</span> waking the machine
+          <span>Uditha Landekumbura</span> Loading
         </p>
       </div>
 
@@ -229,14 +237,14 @@ export default function App() {
           UL<i>/</i>26
         </a>
         <nav aria-label="Sections">
-          <a href="#about">About</a>
-          <a href="#morning">Classroom</a>
-          <a href="#loop">Loop</a>
-          <a href="#work">Work</a>
+          <a href="#about">Profile</a>
+          <a href="#experience">Experience</a>
+          <a href="#morning">Teaching</a>
+          <a href="#work">Projects</a>
           <a href="#contact">Contact</a>
         </nav>
         <p className="hud-clock" aria-hidden="true">
-          <span ref={labelEl}>Before the bell</span>
+          <span ref={labelEl}>Introduction</span>
           <span ref={clockEl} className="t">
             05:00
           </span>
@@ -247,7 +255,7 @@ export default function App() {
 
       <main>
         {/* ───────── 05:00 hero ───────── */}
-        <section id="hero" className="hero" data-t="300" data-label="Before the bell" tabIndex={-1}>
+        <section id="hero" className="hero" data-t="300" data-label="Introduction" tabIndex={-1}>
           <div className="hero-pin">
             <div className="hero-a">
               <p className="eyebrow">
@@ -264,26 +272,26 @@ export default function App() {
                   ))}
                 </ul>
                 <a className="cue" href="#about">
-                  Scroll through the day <span aria-hidden="true">↓</span>
+                  Scroll to explore <span aria-hidden="true">↓</span>
                 </a>
               </div>
             </div>
-            <p className="hero-b" aria-label="I teach it in the morning. I ship it at night.">
+            <p className="hero-b" aria-label={profile.headline.join(' ')}>
               <span className="ln" aria-hidden="true">
-                I teach it in the morning.
+                {profile.headline[0]}
               </span>
               <span className="ln amber" aria-hidden="true">
-                I ship it at night.
+                {profile.headline[1]}
               </span>
             </p>
           </div>
         </section>
 
         {/* ───────── 06:30 about ───────── */}
-        <section id="about" className="about" data-t="390" data-label="First light" tabIndex={-1}>
+        <section id="about" className="about" data-t="390" data-label="Profile" tabIndex={-1}>
           <div className="wrap">
             <p className="kicker">
-              <b>01</b> Both sides of the desk
+              <b>01</b> Profile
             </p>
             <p className="about-text">
               {profile.about.split(' ').map((w, i) => (
@@ -295,30 +303,86 @@ export default function App() {
             <ul className="stats">
               {stats.map((s) => (
                 <li className="stat rv" key={s.label}>
-                  <b data-n={s.n} data-plain={s.plain ? '1' : undefined}>
-                    {s.plain ? s.n : 0}
+                  <b data-n={s.n} data-suffix={s.suffix}>
+                    {s.n}
+                    {s.suffix}
                   </b>
                   <span>{s.label}</span>
                 </li>
               ))}
             </ul>
-            <dl className="aff">
-              {affiliations.map((a) => (
-                <div className="rv" key={a.k}>
-                  <dt>{a.k}</dt>
-                  <dd>{a.v}</dd>
-                </div>
+            <ul className="skills" aria-label="Core strengths">
+              {skills.map((k) => (
+                <li key={k}>{k}</li>
               ))}
-            </dl>
+            </ul>
+          </div>
+        </section>
+
+        {/* ───────── 07:30 experience ───────── */}
+        <section id="experience" className="exp" data-t="450" data-label="Experience" tabIndex={-1}>
+          <div className="wrap">
+            <header className="sec-head">
+              <p className="kicker">
+                <b>02</b> Experience
+              </p>
+              <h2 className="display">
+                Career <em>record</em>
+              </h2>
+            </header>
+            <ol className="exp-list">
+              {experience.map((e) => (
+                <li className="rv" key={e.org + e.period}>
+                  <p className="when">
+                    {e.period}
+                    <span>{e.place}</span>
+                  </p>
+                  <div className="what">
+                    <h3>{e.role}</h3>
+                    <p className="org">{e.org}</p>
+                  </div>
+                  <ul className="points">
+                    {e.points.map((pt) => (
+                      <li key={pt}>{pt}</li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ol>
+            <div className="creds">
+              <div>
+                <p className="label">Education</p>
+                <ul>
+                  {education.map((e) => (
+                    <li className="rv" key={e.title}>
+                      <b>{e.title}</b>
+                      <span>
+                        {e.org} · {e.period}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <p className="label">Certifications</p>
+                <ul>
+                  {certifications.map((c) => (
+                    <li className="rv" key={c}>
+                      <b>{c}</b>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
         </section>
 
         {/* ───────── 08:30 classroom ───────── */}
-        <section id="morning" className="morning" data-t="510" data-label="In the classroom" tabIndex={-1}>
+        <section id="morning" className="morning" data-t="510" data-label="Teaching" tabIndex={-1}>
           <div className="wrap">
             <header className="sec-head">
               <p className="kicker">
-                <b>02</b> 08:30, the morning shift
+                <b>03</b> Teaching
               </p>
               <h2 className="display">
                 The <em>classroom</em>
@@ -330,7 +394,7 @@ export default function App() {
                 <img src={asset('img/workshop.webp')} alt="Illustration of a young builder repairing a robot in a workshop, with rockets and the Earth behind them" width={1672} height={941} loading="lazy" />
               </figure>
               <div className="teaches">
-                <p className="label">Teaches</p>
+                <p className="label">Modules taught</p>
                 <ul>
                   {teaches.map((t) => (
                     <li className="rv" key={t}>
@@ -339,13 +403,13 @@ export default function App() {
                   ))}
                 </ul>
                 <p className="note">
-                  Plus robotics and IoT workshops for school students, and AI tool training for teachers.
+                  Also delivers robotics, IoT and practical programming workshops: 15+ sessions for 200+ students across 8+ schools and institutes.
                 </p>
               </div>
             </div>
 
             <div className="classroom">
-              <p className="label">Built for the classroom. The code behind the lectures, kept public.</p>
+              <p className="label">Reference implementations for each module, published openly for students.</p>
               <ul>
                 {classroom.map((c, i) => (
                   <li className="rv" key={c.topic}>
@@ -370,19 +434,19 @@ export default function App() {
         </section>
 
         {/* ───────── 14:00 the loop ───────── */}
-        <section id="loop" className="loop" data-t="840" data-label="The loop" tabIndex={-1}>
+        <section id="loop" className="loop" data-t="840" data-label="Approach" tabIndex={-1}>
           <div className="loop-track">
             <div className="panel panel-intro">
               <p className="kicker">
-                <b>03</b> 14:00, afternoon
+                <b>04</b> Approach
               </p>
               <h2 className="display">
-                How the
+                Teach, build,
                 <br />
-                work <em>loops</em>
+                <em>refine</em>
               </h2>
               <p className="lede">
-                The teaching and the engineering feed each other. This is the shape that takes, every year.
+                Teaching and engineering inform each other. Each academic year follows the same four stages.
               </p>
             </div>
             {loop.map((s) => (
@@ -396,7 +460,7 @@ export default function App() {
               </article>
             ))}
             <div className="panel panel-now">
-              <p className="label">Right now</p>
+              <p className="label">Current focus</p>
               <dl>
                 {now.map((n) => (
                   <div key={n.k}>
@@ -413,11 +477,11 @@ export default function App() {
         </section>
 
         {/* ───────── 21:00 work ───────── */}
-        <section id="work" className="work" data-t="1260" data-label="Shipping" tabIndex={-1}>
+        <section id="work" className="work" data-t="1260" data-label="Projects" tabIndex={-1}>
           <div className="wrap">
             <header className="sec-head">
               <p className="kicker">
-                <b>04</b> 21:00, the night shift
+                <b>05</b> Projects
               </p>
               <h2 className="display">
                 Selected <em>work</em>
@@ -446,10 +510,10 @@ export default function App() {
         </section>
 
         {/* ───────── 23:00 stack ───────── */}
-        <section id="stack" className="stack" data-t="1380" data-label="Tools down" tabIndex={-1}>
+        <section id="stack" className="stack" data-t="1380" data-label="Technology" tabIndex={-1}>
           <div className="wrap">
             <p className="kicker">
-              <b>05</b> Tech I actually ship with
+              <b>06</b> Technology
             </p>
           </div>
           {stack.map((row) => (
@@ -469,16 +533,16 @@ export default function App() {
         </section>
 
         {/* ───────── 24:00 contact ───────── */}
-        <section id="contact" className="contact" data-t="1425" data-label="Signal out" tabIndex={-1}>
+        <section id="contact" className="contact" data-t="1425" data-label="Contact" tabIndex={-1}>
           <div className="contact-pin">
             <div className="contact-body wrap">
               <p className="kicker">
-                <b>06</b> Midnight, signal out
+                <b>07</b> Contact
               </p>
               <h2 className="display">
-                Colombo
+                Get in
                 <br />
-                <em>to anywhere</em>
+                <em>touch</em>
               </h2>
               <p className="lede">{profile.contact}</p>
               <a className="mail" href={`mailto:${profile.email}`}>
@@ -495,17 +559,19 @@ export default function App() {
                     GitHub <span aria-hidden="true">↗</span>
                   </a>
                 </li>
-                <li>
-                  <a href={profile.blog} target="_blank" rel="noreferrer">
-                    fullstackcraft.dev <span aria-hidden="true">↗</span>
-                  </a>
-                </li>
+                {profile.blog && (
+                  <li>
+                    <a href={profile.blog} target="_blank" rel="noreferrer">
+                      {profile.blog.replace(/^https?:\/\/|\/$/g, '')} <span aria-hidden="true">↗</span>
+                    </a>
+                  </li>
+                )}
               </ul>
             </div>
             <footer className="foot wrap">
               <span>© 2026 {profile.name}</span>
               <span>React · Three.js · GSAP · WebGL shaders</span>
-              <span>Tomorrow, 08:30, it starts again.</span>
+              <span>{profile.location}</span>
             </footer>
           </div>
         </section>

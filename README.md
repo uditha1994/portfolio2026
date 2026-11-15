@@ -1,9 +1,9 @@
 # portfolio2026
 
-Portfolio of **Uditha Landekumbura** — lecturer, software engineer, builder. Colombo, Sri Lanka.
+Portfolio of **Uditha Landekumbura** — Lecturer & Program Manager, full-stack engineer. Sri Lanka.
 
-The page is one working day. Scrolling moves the clock from 05:00 to midnight:
-before the bell, the classroom, the afternoon loop, the night shift, signal out.
+The page reads as one working day. Scrolling moves the clock from 05:00 to midnight
+through profile, experience, teaching, approach, projects, technology and contact.
 
 ## Stack
 
