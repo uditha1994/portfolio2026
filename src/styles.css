@@ -692,8 +692,8 @@ main {
 }
 .step .num {
   position: absolute;
-  top: -0.14em;
-  right: 0.08em;
+  top: 0.06em;
+  right: 0.1em;
   font-family: var(--f-display);
   font-weight: 800;
   font-variation-settings: 'wdth' 60;
@@ -1061,5 +1061,16 @@ main {
   }
   .foot span:nth-child(2) {
     display: none;
+  }
+}
+
+/* the extra-wide accent words would push past a phone's edge at full width */
+@media (max-width: 640px) {
+  .display em {
+    font-variation-settings: 'wdth' 100;
+  }
+  .sec-head,
+  .contact-body {
+    min-width: 0;
   }
 }

@@ -200,7 +200,7 @@ export default function Android() {
     const cover = Math.max(viewport.width / PLANE_W, viewport.height / PLANE_H) * 1.06
     const scale = cover * (1 + fx.hero * 0.45)
     g.scale.setScalar(scale)
-    const tx = portrait ? -0.1 * PLANE_W * scale : 0
+    const tx = portrait ? 0.04 * PLANE_W * scale : 0
     const k = 1 - Math.exp(-dt * 3.5)
     g.position.x += (tx - fx.mx * 0.08 - g.position.x) * k
     g.position.y += (fx.hero * -0.5 + fx.my * 0.05 - g.position.y) * k
