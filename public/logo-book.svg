@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 120" fill="none" role="img" aria-label="Uditha Landekumbura">
+  <g stroke="#EDE6D6">
+    <path d="M70 42Q40 30 8 40v72q32-10 62 2 30-12 62-2V40q-32-10-62 2Zm0 0v72" stroke-width="4.500" stroke-linejoin="round"/>
+    <path d="M26 56v22a12 12 0 0 0 24 0V56M92 56v40" stroke-width="8.500"/>
+    <path d="M70 42 50 25l20-14 20 14Z" stroke-width="2.500" stroke-linejoin="round"/>
+  </g>
+  <g fill="#EDE6D6">
+    <circle cx="70" cy="42" r="5"/>
+    <circle cx="50" cy="25" r="5.500"/>
+    <circle cx="90" cy="25" r="5.500"/>
+  </g>
+  <circle cx="70" cy="11" r="6.500" fill="#FFA51F"/>
+  <rect x="96.250" y="87.500" width="14" height="8.500" fill="#FFA51F"/>
+</svg>

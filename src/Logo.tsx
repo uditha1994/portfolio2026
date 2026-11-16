@@ -1,15 +1,39 @@
 /**
- * Two marks, same initials:
+ * Three marks, same initials:
+ *  - "book": UL written across an open book (lecturing), the foot of the L as a cursor block
+ *    (programming), and a small neural network rising from the spine (AI).
  *  - "bubble": UL inside a speech bubble (lecturing) with a cursor (programming) and a small network (AI).
  *  - "tag": the initials set as a <UL> code tag, with a spark for the AI work.
  * Letters and outlines take the current text colour; the accent is always amber.
  * Change ACTIVE to switch the mark used across the site.
  */
-export type LogoVariant = 'bubble' | 'tag'
+export type LogoVariant = 'book' | 'bubble' | 'tag'
 
-const ACTIVE: LogoVariant = 'bubble'
+const ACTIVE: LogoVariant = 'book'
 
 export default function Logo({ className, variant = ACTIVE }: { className?: string; variant?: LogoVariant }) {
+  if (variant === 'book') {
+    return (
+      <svg className={className} viewBox="0 0 140 120" fill="none" aria-hidden="true" focusable="false">
+        <g stroke="currentColor">
+          <path
+            d="M70 42Q40 30 8 40v72q32-10 62 2 30-12 62-2V40q-32-10-62 2Zm0 0v72"
+            strokeWidth="4.500"
+            strokeLinejoin="round"
+          />
+          <path d="M26 56v22a12 12 0 0 0 24 0V56M92 56v40" strokeWidth="8.500" />
+          <path d="M70 42 50 25l20-14 20 14Z" strokeWidth="2.500" strokeLinejoin="round" />
+        </g>
+        <g fill="currentColor">
+          <circle cx="70" cy="42" r="5" />
+          <circle cx="50" cy="25" r="5.500" />
+          <circle cx="90" cy="25" r="5.500" />
+        </g>
+        <circle className="logo-spark" cx="70" cy="11" r="6.500" fill="#FFA51F" />
+        <rect x="96.250" y="87.500" width="14" height="8.500" fill="#FFA51F" />
+      </svg>
+    )
+  }
   if (variant === 'tag') {
     return (
       <svg className={className} viewBox="0 0 148 86" fill="none" aria-hidden="true" focusable="false">
