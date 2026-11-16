@@ -1,5 +1,8 @@
+import { asset } from './fx'
+
 /**
- * Three marks, same initials:
+ * Four marks, same initials:
+ *  - "brand": Uditha's own UL circuit logo (raster, from public/brand), recoloured for the dark site.
  *  - "book": UL written across an open book (lecturing), the foot of the L as a cursor block
  *    (programming), and a small neural network rising from the spine (AI).
  *  - "bubble": UL inside a speech bubble (lecturing) with a cursor (programming) and a small network (AI).
@@ -7,11 +10,16 @@
  * Letters and outlines take the current text colour; the accent is always amber.
  * Change ACTIVE to switch the mark used across the site.
  */
-export type LogoVariant = 'book' | 'bubble' | 'tag'
+export type LogoVariant = 'brand' | 'book' | 'bubble' | 'tag'
 
-const ACTIVE: LogoVariant = 'book'
+const ACTIVE: LogoVariant = 'brand'
 
 export default function Logo({ className, variant = ACTIVE }: { className?: string; variant?: LogoVariant }) {
+  if (variant === 'brand') {
+    return (
+      <img className={className} src={asset('brand/ul-mark-dark.webp')} width={943} height={560} alt="" decoding="async" />
+    )
+  }
   if (variant === 'book') {
     return (
       <svg className={className} viewBox="0 0 140 120" fill="none" aria-hidden="true" focusable="false">

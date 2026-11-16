@@ -201,7 +201,8 @@ main {
   pointer-events: none;
 }
 .boot-logo {
-  width: 88px;
+  width: 120px;
+  height: auto;
   color: var(--bone);
 }
 @media (prefers-reduced-motion: no-preference) {
@@ -248,8 +249,9 @@ main {
   display: block;
   line-height: 0;
 }
-.hud-mark svg {
-  height: 40px;
+.hud-mark svg,
+.hud-mark img {
+  height: 42px;
   width: auto;
 }
 .hud nav {
@@ -1114,7 +1116,8 @@ main {
   align-items: center;
   gap: 10px;
 }
-.foot-id svg {
+.foot-id svg,
+.foot-id img {
   height: 16px;
   width: auto;
   color: var(--bone);
