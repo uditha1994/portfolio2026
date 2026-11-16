@@ -200,14 +200,25 @@ main {
   visibility: hidden;
   pointer-events: none;
 }
-.boot-ring {
-  width: 44px;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  border: 1px solid var(--line);
-  border-top-color: var(--amber);
-  @media (prefers-reduced-motion: no-preference) {
-    animation: spin 0.9s linear infinite;
+.boot-logo {
+  width: 92px;
+  color: var(--bone);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .boot-logo .logo-spark {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: spark 1.4s var(--ease) infinite alternate;
+  }
+}
+@keyframes spark {
+  from {
+    scale: 0.55;
+    opacity: 0.5;
+  }
+  to {
+    scale: 1.1;
+    opacity: 1;
   }
 }
 @keyframes spin {
@@ -234,16 +245,12 @@ main {
 }
 .hud-mark {
   justify-self: start;
-  font-family: var(--f-display);
-  font-weight: 800;
-  font-variation-settings: 'wdth' 130;
-  font-size: 1rem;
-  letter-spacing: 0;
+  display: block;
+  line-height: 0;
 }
-.hud-mark i {
-  font-style: normal;
-  opacity: 0.5;
-  margin-inline: 0.15em;
+.hud-mark svg {
+  height: 30px;
+  width: auto;
 }
 .hud nav {
   display: flex;
@@ -1101,6 +1108,16 @@ main {
   padding-block: 20px;
   border-top: 1px solid var(--line);
   color: var(--mute);
+}
+.foot-id {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.foot-id svg {
+  height: 16px;
+  width: auto;
+  color: var(--bone);
 }
 
 /* ── small screens ───────────────────────────────────────── */

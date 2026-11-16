@@ -3,6 +3,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
 import { fx, asset } from './fx'
+import Logo from './Logo'
 import { certifications, classroom, education, experience, loop, now, profile, skills, stack, stats, teaches, work } from './data'
 
 const Stage = lazy(() => import('./gl/Stage'))
@@ -226,7 +227,7 @@ export default function App() {
       </Suspense>
 
       <div className={`boot${ready ? ' is-done' : ''}`} aria-hidden={ready}>
-        <span className="boot-ring" />
+        <Logo className="boot-logo" />
         <p>
           <span>Uditha Landekumbura</span> Loading
         </p>
@@ -234,7 +235,7 @@ export default function App() {
 
       <header className="hud">
         <a className="hud-mark" href="#hero" aria-label="Uditha Landekumbura, back to top">
-          UL<i>/</i>26
+          <Logo />
         </a>
         <nav aria-label="Sections">
           <a href="#about">Profile</a>
@@ -569,7 +570,9 @@ export default function App() {
               </ul>
             </div>
             <footer className="foot wrap">
-              <span>© 2026 {profile.name}</span>
+              <span className="foot-id">
+                <Logo />© 2026 {profile.name}
+              </span>
               <span>React · Three.js · GSAP · WebGL shaders</span>
               <span>{profile.location}</span>
             </footer>
