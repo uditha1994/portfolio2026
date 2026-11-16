@@ -88,10 +88,16 @@ export default function App() {
         .to('.hero-name', { '--w': 50, ease: 'none', duration: 0.34 }, 0)
         .to('.hero-a', { autoAlpha: 0, yPercent: -10, ease: 'power1.in', duration: 0.26 }, 0.08)
         .fromTo(
+          '.hero-logo',
+          { autoAlpha: 0, scale: 0.86 },
+          { autoAlpha: 1, scale: 1, ease: 'power2.out', duration: 0.2 },
+          0.44,
+        )
+        .fromTo(
           '.hero-b .ln',
           { autoAlpha: 0, yPercent: 60, '--w': 150 },
           { autoAlpha: 1, yPercent: 0, '--w': 62, ease: 'power2.out', duration: 0.22, stagger: 0.1 },
-          0.5,
+          0.54,
         )
         .set({}, {}, 1)
 
@@ -277,7 +283,15 @@ export default function App() {
                 </a>
               </div>
             </div>
-            <p className="hero-b" aria-label={profile.headline.join(' ')}>
+            <p className="hero-b" aria-label={`${profile.name}. ${profile.headline.join(' ')}`}>
+              <img
+                className="hero-logo"
+                src={asset('brand/ul-lockup-dark.webp')}
+                width={943}
+                height={774}
+                alt=""
+                decoding="async"
+              />
               <span className="ln" aria-hidden="true">
                 {profile.headline[0]}
               </span>
