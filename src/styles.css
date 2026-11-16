@@ -201,7 +201,7 @@ main {
   pointer-events: none;
 }
 .boot-logo {
-  width: 92px;
+  width: 88px;
   color: var(--bone);
 }
 @media (prefers-reduced-motion: no-preference) {
@@ -249,7 +249,7 @@ main {
   line-height: 0;
 }
 .hud-mark svg {
-  height: 30px;
+  height: 36px;
   width: auto;
 }
 .hud nav {
